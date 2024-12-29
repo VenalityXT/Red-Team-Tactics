@@ -22,26 +22,20 @@ Fix Applied: To resolve this, the connection was modified to disable SSL by usin
 
 This successfully allowed us to bypass the SSL/TLS connection issue and access the MySQL database.
 
-Explanation of Command:                                                                                 
+### Explanation of Command:                                                                                 
 
--u root: Specifies the root user to attempt login.                                                                                 
--p: Prompts for a password (used to test the default password or perform a brute-force attack).                                                                                 
---skip-ssl: Disables SSL (Secure Sockets Layer), which resolved the error related to SSL/TLS version mismatch.                                                                                 
--h 192.168.1.184: Specifies the Metasploitable VM's IP address.                                                                                 
+__-u root:__ Specifies the root user to attempt login.                                                                           
+__-p:__ Prompts for a password (used to test the default password or perform a brute-force attack).                                                                          
+__--skip-ssl:__ Disables SSL (Secure Sockets Layer), which resolved the error related to SSL/TLS version mismatch.                                                                                 
+__-h 192.168.1.184:__ Specifies the Metasploitable VM's IP address.                                                                                 
 
 No Password Set:                                                                                 
-![MySQL GainedAccess](https://github.com/user-attachments/assets/4ca770eb-4f75-48d5-aade-e57952a8ecc8)
+![MySQL GainedAccess](https://github.com/user-attachments/assets/4ca770eb-4f75-48d5-aade-e57952a8ecc8)                                                                              
 
-Upon logging in without specifying a password, the MySQL service allowed access without authentication, as no password had been set for the root user.                                                                                 
-This highlights the unsecured nature of the MySQL service on Metasploitable, allowing unauthenticated access to the database.                                                                                 
+### Proof of Work:
+Upon logging in without specifying a password, the MySQL service allowed access without authentication, as no password had been set.                                                                                 
+This highlights the unsecured nature of the MySQL service on Metasploitable, allowing unauthenticated access to the database.   
 
-Results:                                                                                 
-Successfully gained access to the MySQL database on the Metasploitable VM.                                                                                 
-
-No password was required to access the MySQL service.
-Once logged in, we were able to access the MySQL server and perform various queries, including listing databases, checking users, and dumping sensitive data.
-
-Proof of Work:
 After gaining access, we verified the connection by querying the databases:                                
 ![MySQL ShowDatabases](https://github.com/user-attachments/assets/39378eaf-e8d1-40b7-a8c8-47aa3e2baa6f)
 
@@ -57,28 +51,30 @@ Read Files on the Target:
 Successfully logged in and accessed the MySQL service.                                                                           
 
 Writing a backdoor (Failed)                                                                           
-![BackdoorAttemptFailed](https://github.com/user-attachments/assets/b2b2d9d9-6d2d-4ab7-83d2-dd748931ddbc)
+![BackdoorAttemptFailed](https://github.com/user-attachments/assets/b2b2d9d9-6d2d-4ab7-83d2-dd748931ddbc)                                                                           
 Writing a backdoor (Success)                                                                           
-![BackdoorAttemptSuccess](https://github.com/user-attachments/assets/2bb7efe1-0b53-4f47-a74b-12bcdce9689c)
+![BackdoorAttemptSuccess](https://github.com/user-attachments/assets/2bb7efe1-0b53-4f47-a74b-12bcdce9689c)                                                                           
+                                                                        
 
+## Recommendations for Mitigation:                                                                           
 
-Accessing it via the browser:                                                                           
+1. Enforce Strong Password Policies:                                                                           
+    - Use a minimum password length of 12 characters with a combination of uppercase, lowercase, numbers, and special characters.
 
-## Recommendations for Mitigation:
-Enforce Strong Password Policies:
+2. Disable Remote Access for MySQL:                                                                           
+    - Modify the MySQL configuration to restrict access to only trusted IP addresses.
 
-Use a minimum password length of 12 characters with a combination of uppercase, lowercase, numbers, and special characters.
-Disable remote root login, if possible, to limit exposure to attacks.
-Disable Remote Access for MySQL:
+3. Enable SSL/TLS Encryption for MySQL:                                                                           
+    - Configure MySQL to use SSL/TLS encryption to protect data in transit and prevent man-in-the-middle attacks.
 
-Modify the MySQL configuration to restrict access to only trusted IP addresses.
-Enable SSL/TLS Encryption for MySQL:
+4. Ensure proper configuration of SSL certificates to avoid version mismatches.                                                                           
+    - Use trusted Certificate Authorities (CAs) to issue SSL certificates.
+      
+5. Limit User Privileges:                                                                           
+    - Use least-privilege principles when creating MySQL users, ensuring they only have the necessary permissions.
+   
+7. Use Intrusion Detection and Prevention Tools:                                                                           
+    - Deploy a Network Intrusion Detection System (NIDS) such as Snort or Suricata to monitor database traffic.
 
-Configure MySQL to use SSL/TLS encryption to protect data in transit and prevent man-in-the-middle attacks.
-Ensure proper configuration of SSL certificates to avoid version mismatches.
-Limit User Privileges:
-
-Use least-privilege principles when creating MySQL users, ensuring they only have the necessary permissions.
-Use Intrusion Detection and Prevention Tools:
-
-Implement tools such as fail2ban or a firewall to limit login attempts and block IPs after multiple failed login attempts.
+8. Use Rate-Limiting and Intrusion Prevention Tools:                                                                                                                                       
+    - Install fail2ban to block IPs after multiple failed login attempts
