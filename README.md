@@ -3,7 +3,7 @@ This repository contains the findings and results of a penetration testing proje
 
 ===========================================================================
 
-### Project Overview                                                                            
+### Project Overview                                                                             
 Target: Metasploitable 2 Virtual Machine                                                    
 Tools Used: Metasploit, Nmap, SSH, Medusa, and more                                    
 
