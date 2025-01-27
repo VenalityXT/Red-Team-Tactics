@@ -1,6 +1,6 @@
 # Exploit 2: Unsecured MySQL Database                                                                                 
 
-## Discovery Process                                                                                 
+## Discovery Process                                                                                  
 Conducted an Nmap scan of the target to identify open ports and running services:
 
 ![NMAP Scan](https://github.com/user-attachments/assets/e5d33e05-78da-48f0-a3e3-a1c308f17f50)
