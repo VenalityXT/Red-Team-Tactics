@@ -42,20 +42,20 @@ The lab targets **Metasploitable 2**, a vulnerable virtual machine commonly used
 
 ## Key Achievements
 
-- **Discovered and exploited 7+ service vulnerabilities**  
-  *Used Nmap and banner grabbing to identify vulnerable versions of OpenSSH, VSFTPD, Samba, and Apache services on Metasploitable 2.*
+- **Exploited command injection vulnerability in the web application**  
+  *Used the web application's input fields to inject OS commands and gain access to the underlying Linux system, achieving remote code execution on the target.*
 
-- **Achieved 3 successful privilege escalations**  
-  *Used misconfigured sudo permissions, SUID binaries, and kernel exploits to escalate from limited shell access to root.*
+- **Exploited an insecure SMB service to enumerate users and share information**  
+  *Leveraged weak configurations in the SMB service to access shared folders and enumerate users, revealing sensitive files and user credentials.*
 
-- **Cracked 5 user credentials using brute-force**  
-  *Utilized Hydra and Medusa to crack SSH and FTP logins, including accounts with default and weak passwords.*
+- **Exploited weak SSH credentials through brute-forcing**  
+  *Used Hydra to brute-force SSH login credentials, gaining unauthorized access to the system with default and weak passwords.*
 
-- **Executed post-exploitation actions on compromised systems**  
-  *Enumerated users, extracted hashed passwords, and captured sensitive information from `/etc/shadow`, web server directories, and running processes.*
+- **Accessed an unsecured MySQL database**  
+  *Exploited default configurations and weak passwords to gain access to an open MySQL service, retrieving sensitive data such as user credentials and database entries.*
 
-- **Delivered 6 system hardening recommendations**  
-  *Compiled actionable mitigation steps, including service patching, removal of unnecessary packages, sudo audits, and strong authentication enforcement.*
+- **Identified and documented 6 additional vulnerabilities in the system**  
+  *Discovered the presence of unpatched services such as outdated Apache, VSFTPD, and OpenSSH versions that could be targeted for further exploitation, along with potential configuration weaknesses like world-readable files and unnecessary services running.*
 
 ---
 
@@ -65,13 +65,19 @@ The lab targets **Metasploitable 2**, a vulnerable virtual machine commonly used
   *Followed a structured attack lifecycle including reconnaissance, exploitation, privilege escalation, and reporting.*
 
 - **Vulnerability Discovery and Exploitation**  
-  *Identified outdated and misconfigured services, developed and launched targeted attacks using Metasploit and manual methods.*
+  *Identified vulnerable services, exploited misconfigurations, and injected commands to compromise Metasploitable 2. Conducted brute-force attacks to crack weak credentials.*
 
-- **Credential Attack Techniques**  
-  *Applied brute-force and dictionary attacks against services with exposed login interfaces, simulating real attacker behavior.*
+- **Command Injection Attacks**  
+  *Exploited vulnerable web application input fields to execute arbitrary commands on the underlying host, simulating real-world attack techniques.*
+
+- **SMB Exploitation**  
+  *Enumerated shared resources and user accounts by leveraging insecure SMB configurations, facilitating further access to sensitive files.*
+
+- **Brute-Force Attack Techniques**  
+  *Used Hydra to perform dictionary-based brute-force attacks on SSH and FTP services, bypassing weak password protections.*
 
 - **Post-Exploitation Enumeration**  
-  *Gathered host-based data, escalated access rights, and mapped internal systems using compromised credentials.*
+  *Escalated access by exploiting unsecured services, enumerating users, extracting hashed passwords, and mapping the internal system.*
 
 - **Red Team Reporting and Defense Recommendations**  
   *Generated findings and mitigation strategies to strengthen defensive posture based on offensive results.*
@@ -80,20 +86,26 @@ The lab targets **Metasploitable 2**, a vulnerable virtual machine commonly used
 
 ## Recommendations for Future Enhancements
 
-- **Simulate Pivoting and Lateral Movement**  
-  Add more vulnerable machines to the lab and attempt internal pivoting via compromised hosts.
+- **Apply Patches and Update Vulnerable Services**  
+  Ensure that all software, including **Apache**, **OpenSSH**, **VSFTPD**, and **Samba**, is updated to mitigate known vulnerabilities such as **CVE-2017-11103** (Apache), **CVE-2016-0748** (OpenSSH), and **CVE-2011-1087** (Samba).
 
-- **Incorporate Evasion Techniques**  
-  Explore AV/IDS evasion with tools like `Veil`, `msfvenom`, and obfuscation scripts.
+- **Implement Strong Authentication**  
+  Enforce strong password policies and implement two-factor authentication for critical services, particularly SSH and MySQL.
 
-- **Introduce Logging and Detection Simulation**  
-  Integrate basic monitoring tools (e.g., syslog, auditd) to correlate attacks with detectable behavior.
+- **Restrict SMB Shares**  
+  Secure SMB shares by limiting access to specific users or IP addresses and disabling the anonymous access that Metasploitable 2 permits by default.
 
-- **Include Exploit Customization**  
-  Modify or write custom shellcode and payloads to bypass simple filters or target non-standard ports.
+- **Secure MySQL Database Access**  
+  Configure MySQL to require strong, unique passwords, limit access to trusted IP addresses, and use encryption for sensitive data at rest.
 
-- **Expand to Web Application Exploits**  
-  Leverage tools like Burp Suite to identify XSS, SQLi, and RFI vulnerabilities in Metasploitable 2’s web stack.
+- **Regular Audits of Sudo Permissions and Services**  
+  Review and remove unnecessary sudo permissions and services that are not required by the system to minimize attack surfaces.
+
+- **Service Hardening and Firewalls**  
+  Disable unnecessary services and implement **iptables** or **ufw** to restrict inbound and outbound traffic to only trusted hosts and ports.
+
+- **Introduce Advanced Evasion and Pivoting Techniques**  
+  In future labs, simulate internal network pivoting after initial compromise to further assess how far an attacker could penetrate.
 
 ---
 
