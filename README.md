@@ -183,3 +183,7 @@ mysql -u root -h 192.168.56.101
 
 - **Add advanced techniques in future labs**  
   Internal pivoting, privilege escalation chains, anti-forensics, and evasion testing.
+
+---
+
+This project does not use an open-source license. All rights reserved.
