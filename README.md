@@ -210,7 +210,3 @@ mysql -u root -h 192.168.56.101
 ```
 
 ---
-
-## License
-
-This project does not use an open-source license. All rights reserved.
